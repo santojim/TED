@@ -56,8 +56,8 @@
 
   **InsertJobs table :**
 
-    idClient  | idJob   |          parameters  | periodic | time_periodic |
-------------- | :-----: | -------------------- | :------: | :-----------: |
+    idClient  | idJob   | parameters           | periodic | time_periodic |
+------------- | :-----: | :------------------- | :------: | :-----------: |
 999999999999  | 1       | -oX - www.google.com | 1        | 30            |
 888888888888  | 0       | -oX - www.in.gr      | 0        | 0             |
 
@@ -90,3 +90,4 @@
   - Αρχείο `LogginListener` :
   - Αρχείο `ServerInteraction` :
   - Αρχείο `updateListener` :
+
