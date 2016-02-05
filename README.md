@@ -31,17 +31,22 @@
     - `ArrayList<String> services` : Λίστα με τα service για κάθε port (http, ftp , ssh , mysql κλπ).
 
 #### database
-##### Η Βάση 
-+-----------+----------+----------+--------+----------+
-| idAndroid | username | password | active | loggedin |
-+-----------+----------+----------+--------+----------+
-|         2 | jim      | 49       |      0 |        1 |
-+-----------+----------+----------+--------+----------+
+
+##### Σχήμα Βάσης
+  -TurnOffClients table :
+        idClient  | accept
+    ------------- | -------------
+    999999999999  | 1 
+    888888888888  | 0     
 
 
-##### Κώδικας
-  - Αρχείο `DbConnector` : 
-  - Αρχείο `DbCreation` : Καλείται από το `DbConnector`
+##### Αρχεία
+  - Αρχείο `DbConnector` : Περιέχει όλες τις μεθόδους που αναλαμβάνουν την επικοινωνία με την βάση. Ο constructor ελέγχει αν υπάρχει η βάση μέσω του `DbCreation` constructor. Πριν καλεστεί κάποια μέθοδος πρέπει να χρησιμοποιηθεί η μέθοδος `open()` και στο τέλος η `close()`, η πρώτη ανοίγει και διαβάζει και η δεύτερη κλείνει την βάση που χρησιμοποιεί το πρόγραμμα αντίστοιχα.
+  - Αρχείο `DbCreation` : Δημιουργείται από τον constructor του `DbConnector`. Εάν η βάση δεδομένων δεν υπάρχει, δημιουργείται. Η βάση αποτελείται απο τέσσερα tables:
+    - PendingClients, έχει δύο πεδία `idClient VARCHAR` και `accept INT`. Κάθε εγγραφή στο table δηλώνει μια ενέργεια του χρήστη.
+    - DeletePeriodicJobs, έχει δύο πεδία `idClient VARCHAR` και `idJob INT`. Κάθε εγγραφή στο table δηλώνει μια ενέργεια του χρήστη. 
+    - InsertJobs, έχει πέντε πεδία `idClient VARCHAR`,`idJob INT`,`parameters VARCHAR`,`periodic INT`,`time_periodic INT`. Κάθε εγγραφή στο table δηλώνει μια ενέργεια του χρήστη.
+    - TurnOffClients, έχει ένα πεδίο `idClient VARCHAR`. Προφανώς κάθε εγγραφή αφορά κάποιον client που πρέπει να τερματιστεί.
   - Αρχείο `DbObject` : Είναι το αντικείμενο που επιστρέφουν τα ερωτήματα στην βάση. Για την ακρίβεια τα ερωτήματα-μέθοδοι από το αρχείο `DbConnector` της μορφής `Database_Get_*` επιστρέφουν `ArrayList<DbObject>`. Έχει τέσσερα πεδία :
     - `String Client_id` : Το ID του Client.
     - `int job_id` : To ID της εντολής nmap.
