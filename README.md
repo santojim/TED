@@ -33,33 +33,33 @@
 #### database
 
 ##### Σχήμα Βάσης
-  -PendingClients table :
+  **PendingClients table :**
 
     idClient  | accept |
 ------------- | :----: |
 999999999999  | 1      |
 888888888888  | 0      |
 
-  -TurnOffClients table :
+  **TurnOffClients table :**
 
     idClient  |
 ------------- |
 999999999999  |
 888888888888  |
 
-  -DeletePeriodicJobs table :
+  **DeletePeriodicJobs table :**
 
     idClient  | idJob |
 ------------- | :---: |
 999999999999  | 1     |
 888888888888  | 0     |
 
-  -InsertJobs table :
+  **InsertJobs table :**
 
-    idClient  | idJob   |          parameters | periodic | time_periodic |
-------------- | :-----: | ------------------- | :------: | :-----------: |
-999999999999  | 1       |-oX - www.google.com | 1        | 30            |
-888888888888  | 0       |-oX - www.in.gr      | 0        | 0             |
+    idClient  | idJob   |          parameters  | periodic | time_periodic |
+------------- | :-----: | -------------------- | :------: | :-----------: |
+999999999999  | 1       | -oX - www.google.com | 1        | 30            |
+888888888888  | 0       | -oX - www.in.gr      | 0        | 0             |
 
 ##### Αρχεία
   - Αρχείο `DbConnector` : Περιέχει όλες τις μεθόδους που αναλαμβάνουν την επικοινωνία με την βάση. Ο constructor ελέγχει αν υπάρχει η βάση μέσω του `DbCreation` constructor. Πριν καλεστεί κάποια μέθοδος πρέπει να χρησιμοποιηθεί η μέθοδος `open()` και στο τέλος η `close()`, η πρώτη ανοίγει και διαβάζει και η δεύτερη κλείνει την βάση που χρησιμοποιεί το πρόγραμμα αντίστοιχα.
